@@ -1,36 +1,22 @@
 # Stratégie API
 
-## API admin locale
+## État actuel
 
-Les routes Next.js sous `/api/admin` utilisent exclusivement `storage/*.json` avec `fs/promises` côté serveur. Elles sont protégées par un cookie de démonstration qui devra être remplacé par Auth.js, WordPress JWT ou Supabase Auth.
-
-## État initial
-
-Les modules `wordpress.ts`, `woocommerce.ts`, `stripe.ts` et `paypal.ts` sont des adaptateurs inactifs. Ils ne réalisent aucun appel réseau et ne contiennent aucun secret.
+Le front utilise des mocks JSON locaux en lecture seule. Il n'existe plus de routes `/api/admin`, d'authentification admin ou de CRUD Next.js. Aucun appel WordPress, WooCommerce, Stripe ou PayPal n'est exécuté.
 
 ## WordPress
 
-- Lecture côté serveur avec cache et revalidation.
-- Schémas TypeScript et validation Zod aux frontières.
-- Aucune écriture depuis le navigateur.
-- Définir précisément les types de contenus Films, Équipe et Pages avant connexion.
+L'adaptateur `src/lib/wordpress.ts` prépare les fonctions de pages, films, médias et SEO. La connexion future sera réalisée côté serveur vers `WORDPRESS_API_URL`, avec validation des réponses, cache et revalidation.
 
 ## WooCommerce
 
-- Catalogue lu côté serveur.
-- Les clés consommateur restent dans l’environnement serveur.
-- Les commandes ne sont créées qu’après validation du parcours de paiement.
-
-## Stripe et PayPal
-
-- Utiliser les SDK officiels dans des routes serveur.
-- Créer les montants côté serveur à partir d’identifiants de packs connus.
-- Vérifier les webhooks et garantir l’idempotence.
-- Commencer exclusivement avec les environnements de test.
+L'adaptateur `src/lib/woocommerce.ts` prépare la lecture des produits, des packs et la future création d'une URL de checkout. Les clés consommateur resteront exclusivement dans l'environnement serveur.
 
 ## Sécurité
 
-- Validation Zod de toutes les entrées.
-- Journalisation sans secrets ni données sensibles.
-- Limitation de débit sur les formulaires et endpoints transactionnels.
-- Politique CSP, en-têtes de sécurité et rotation des clés avant production.
+- aucune écriture depuis le navigateur vers WordPress ;
+- validation des réponses et entrées aux frontières ;
+- aucun secret dans Git ;
+- journalisation sans données sensibles ;
+- environnements de test pour Stripe et PayPal ;
+- aucune connexion au WordPress Namecheap pendant le développement local.

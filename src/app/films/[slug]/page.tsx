@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { FilmDonationBox } from "@/components/films/FilmDonationBox";
 import { FilmHero } from "@/components/films/FilmHero";
 import { Container } from "@/components/layout/Container";
-import { getFilmBySlug } from "@/lib/admin-storage";
+import { getWordPressFilmBySlug } from "@/lib/wordpress";
 import { createMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
@@ -13,7 +13,7 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const film = await getFilmBySlug((await params).slug);
+  const film = await getWordPressFilmBySlug((await params).slug);
   return film && film.publicVisibility
     ? createMetadata(
         film.seoTitle || film.title,
@@ -28,7 +28,7 @@ export default async function FilmDetailPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const film = await getFilmBySlug((await params).slug);
+  const film = await getWordPressFilmBySlug((await params).slug);
   if (!film || !film.publicVisibility) notFound();
   return (
     <>

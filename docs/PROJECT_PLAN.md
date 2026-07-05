@@ -1,8 +1,8 @@
 # Plan du projet RU Union
 
-## Back-office local de recette
+## Architecture retenue
 
-Le back-office mock sous `/admin` valide les modèles Film et SupportPack, les formulaires, les filtres et la synchronisation front avant le choix du CMS ou de la base définitive. Le stockage JSON et l’authentification de démonstration devront être remplacés avant production.
+WordPress local sous XAMPP est le back-office éditorial. Next.js est uniquement le front public. Les mocks JSON restent temporairement disponibles en lecture seule jusqu'au branchement des API WordPress et WooCommerce.
 
 ## Vision
 
@@ -10,25 +10,17 @@ RU Union utilise le cinéma, les rencontres et les actions culturelles pour renf
 
 ## Socle technique
 
-- Next.js avec App Router
-- React et TypeScript strict
-- Tailwind CSS et composants réutilisables
-- Contenus mock locaux pendant la phase de conception
-- Intégrations externes uniquement côté serveur dans les lots concernés
-
-## Principes
-
-1. Accessibilité et mobile first.
-2. Séparation entre présentation, données et intégrations.
-3. Aucun secret dans le navigateur ou dans Git.
-4. Déploiements progressifs avec recette à chaque lot.
-5. Le WordPress actuel reste indépendant jusqu’à la stratégie de migration validée.
+- Next.js avec App Router, React et TypeScript strict ;
+- Tailwind CSS et composants réutilisables ;
+- WordPress, CPT Films, ACF et WooCommerce côté CMS ;
+- intégrations externes uniquement côté serveur ;
+- aucun secret dans le navigateur ou dans Git.
 
 ## Jalons
 
-1. Valider le socle et le design system.
-2. Finaliser les contenus et médias.
-3. Connecter le CMS et la boutique en lecture.
-4. Activer les paiements en environnement de test.
+1. Installer et configurer WordPress local dans XAMPP.
+2. Créer le CPT Films, les champs ACF et les produits WooCommerce de test.
+3. Connecter les films, la boutique et les métadonnées SEO en lecture.
+4. Activer les paiements dans les environnements de test.
 5. Réaliser les audits sécurité, SEO, performance et conformité.
-6. Préparer la mise en ligne et la formation.
+6. Préparer séparément la stratégie de production, sans toucher au site Namecheap pendant le développement local.

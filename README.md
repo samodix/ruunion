@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Le site est ensuite disponible sur `http://localhost:3000`.
+Le front public est ensuite disponible sur `http://localhost:3000`. La route `/admin` redirige vers le WordPress XAMPP local.
 
 ## Vérifications
 

@@ -1,39 +1,21 @@
-# Stratégie future du backend
+# Stratégie backend retenue
 
-## Limites du mock actuel
+Le backend éditorial retenu est WordPress headless. Le dashboard mock Next.js et ses routes CRUD ont été retirés.
 
-Le stockage JSON permet une recette rapide mais ne convient pas au multi-utilisateur, aux déploiements serverless, aux écritures concurrentes ni à la traçabilité avancée. L’authentification de démonstration n’offre aucune sécurité réelle.
+## WordPress headless
 
-## Option 1 — WordPress Headless
+- CPT `films` avec champs ACF structurés ;
+- produits WooCommerce pour les packs de soutien ;
+- métadonnées via Yoast SEO ou Rank Math ;
+- contenus lus côté serveur par Next.js avec cache et revalidation ;
+- écritures réservées à une API authentifiée et auditée si elles deviennent nécessaires.
 
-- Créer un Custom Post Type `film` avec champs structurés.
-- Utiliser les produits WooCommerce pour les packs de soutien.
-- Exposer les métadonnées SEO via Yoast SEO ou RankMath.
-- Consommer les contenus en lecture côté serveur avec cache et revalidation.
-- Restreindre les écritures à une API authentifiée et auditée.
+## Phase transitoire
 
-## Option 2 — Supabase
+Les fichiers JSON locaux restent une source de démonstration en lecture seule. Ils ne constituent pas un CMS et seront remplacés progressivement par les réponses REST du WordPress XAMPP.
 
-- Tables `films`, `support_packs`, `donations` et profils admin.
-- Supabase Auth pour le back-office.
-- Storage pour les affiches, galeries et documents.
-- Row Level Security et migrations versionnées.
+## Paiements futurs
 
-## Option 3 — PostgreSQL et Prisma
+Stripe et PayPal seront activés uniquement côté serveur et d'abord dans leurs environnements de test. Les signatures de webhooks, l'idempotence et l'enregistrement des commandes devront être validés avant toute production.
 
-- Modèles `Film`, `SupportPack`, `Donation`, `Order` et `AdminUser`.
-- Migrations Prisma, contraintes d’unicité et transactions.
-- Auth.js pour les sessions admin.
-- Stockage objet séparé pour les médias.
-
-## Stripe et PayPal
-
-- Créer les sessions côté serveur depuis des packs connus en base.
-- Enregistrer les commandes et états de paiement.
-- Vérifier les signatures des webhooks et gérer l’idempotence.
-- Synchroniser `donationCollected` uniquement après confirmation serveur.
-- Tester intégralement dans les sandboxes avant activation.
-
-## Recommandation
-
-Valider d’abord le modèle éditorial et les parcours avec ce back-office local. Choisir ensuite WordPress Headless si l’autonomie éditoriale prime, ou PostgreSQL/Supabase si les dons, commandes et données relationnelles deviennent le cœur du produit.
+Voir `ARCHITECTURE_HEADLESS_WORDPRESS.md` et `LOCAL_WORDPRESS_XAMPP.md`.

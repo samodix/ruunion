@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
 import { SupportPackCard } from "@/components/shop/SupportPackCard";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { getSupportPacks } from "@/lib/admin-storage";
+import { getWooSupportPacks } from "@/lib/woocommerce";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createMetadata(
@@ -13,7 +13,7 @@ export const metadata: Metadata = createMetadata(
 export const dynamic = "force-dynamic";
 
 export default async function BoutiquePage() {
-  const packs = (await getSupportPacks()).sort(
+  const packs = (await getWooSupportPacks()).sort(
     (a, b) =>
       Number(b.isHighlighted) - Number(a.isHighlighted) || a.price - b.price,
   );

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { FilmGrid } from "@/components/films/FilmGrid";
 import { Container } from "@/components/layout/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { getFilms } from "@/lib/admin-storage";
+import { getWordPressFilms } from "@/lib/wordpress";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createMetadata(
@@ -13,7 +13,7 @@ export const metadata: Metadata = createMetadata(
 export const dynamic = "force-dynamic";
 
 export default async function FilmsPage() {
-  const films = (await getFilms())
+  const films = (await getWordPressFilms())
     .filter((film) => film.publicVisibility)
     .sort((a, b) => a.priorityOrder - b.priorityOrder || b.year - a.year);
   return (
