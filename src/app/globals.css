@@ -40,6 +40,14 @@ body {
     sans-serif;
 }
 
+.ru-cinematic-lines {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
 ::selection {
   background: color-mix(in srgb, var(--ru-primary) 40%, white);
 }

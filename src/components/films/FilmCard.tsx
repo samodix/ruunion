@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Clapperboard } from "lucide-react";
 import type { Film, FilmStatus } from "@/types/film";
 import { formatCurrency } from "@/lib/utils";
 
@@ -11,9 +11,9 @@ const statusLabels: Record<FilmStatus, string> = {
 };
 
 const accents = [
-  "from-[#48C1B3] to-[#0E9A8B]",
-  "from-[#F6B62E] to-[#FFD77A]",
-  "from-[#33363A] to-[#5F666B]",
+  "from-[#0E9A8B] via-[#48C1B3] to-[#A6E3DB]",
+  "from-[#D98D10] via-[#F6B62E] to-[#FFE1A0]",
+  "from-[#222629] via-[#33363A] to-[#71797E]",
 ];
 
 export function FilmCard({ film }: { film: Film }) {
@@ -24,30 +24,41 @@ export function FilmCard({ film }: { film: Film }) {
   const accent = accents[Math.abs(film.priorityOrder) % accents.length];
 
   return (
-    <article className="group border-ru-border overflow-hidden rounded-[2rem] border bg-white shadow-[0_18px_60px_rgba(51,54,58,.07)]">
-      <div className={`relative h-56 bg-gradient-to-br ${accent} p-6`}>
-        <span className="text-ru-ink rounded-full bg-white/90 px-3 py-2 text-xs font-extrabold">
+    <article className="group border-ru-border overflow-hidden rounded-[2.25rem] border bg-white shadow-[0_18px_60px_rgba(51,54,58,.08)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_28px_90px_rgba(14,154,139,.16)]">
+      <div
+        className={`relative h-64 overflow-hidden bg-gradient-to-br ${accent} p-6`}
+      >
+        <div className="absolute inset-0 bg-[linear-gradient(120deg,transparent_35%,rgba(255,255,255,.22)_50%,transparent_65%)] opacity-0 transition duration-700 group-hover:translate-x-24 group-hover:opacity-100" />
+        <span className="text-ru-ink relative rounded-full bg-white/92 px-3 py-2 text-xs font-extrabold shadow-sm">
           {statusLabels[film.status]}
         </span>
-        <div className="text-ru-primary-dark absolute right-5 bottom-5 grid size-12 place-items-center rounded-full bg-white transition group-hover:rotate-12">
+        <Clapperboard
+          className="absolute bottom-7 left-7 text-white/65"
+          size={42}
+        />
+        <div className="text-ru-primary-dark absolute right-6 bottom-6 grid size-13 place-items-center rounded-full bg-white shadow-xl transition group-hover:scale-105 group-hover:rotate-12">
           <ArrowUpRight />
         </div>
       </div>
-      <div className="p-6">
-        <p className="text-ru-primary-dark text-xs font-bold tracking-[.16em] uppercase">
+      <div className="p-7">
+        <p className="text-ru-primary-dark text-xs font-bold tracking-[.17em] uppercase">
           Film solidaire · {film.year}
         </p>
-        <h3 className="mt-3 text-2xl font-black">{film.title}</h3>
-        <p className="text-ru-muted mt-3 leading-7">{film.shortDescription}</p>
+        <h3 className="mt-3 text-2xl font-black tracking-[-.025em]">
+          {film.title}
+        </h3>
+        <p className="text-ru-muted mt-3 min-h-14 leading-7">
+          {film.shortDescription}
+        </p>
         {goal > 0 && (
-          <div className="mt-6">
-            <div className="flex justify-between text-xs font-bold">
+          <div className="bg-ru-soft mt-6 rounded-2xl p-4">
+            <div className="flex justify-between gap-4 text-xs font-bold">
               <span>{formatCurrency(collected)} collectés</span>
-              <span>{progress}%</span>
+              <span className="text-ru-primary-dark">{progress} %</span>
             </div>
-            <div className="bg-ru-border mt-2 h-2 overflow-hidden rounded-full">
+            <div className="bg-ru-border mt-3 h-2.5 overflow-hidden rounded-full">
               <div
-                className="bg-ru-primary-dark h-full rounded-full"
+                className="from-ru-primary-dark to-ru-yellow h-full rounded-full bg-gradient-to-r"
                 style={{ width: `${progress}%` }}
               />
             </div>
@@ -55,9 +66,9 @@ export function FilmCard({ film }: { film: Film }) {
         )}
         <Link
           href={`/films/${film.slug}`}
-          className="text-ru-primary-dark mt-6 inline-flex font-extrabold"
+          className="text-ru-primary-dark mt-7 inline-flex font-extrabold"
         >
-          Découvrir et soutenir
+          Entrer dans l’histoire
         </Link>
       </div>
     </article>

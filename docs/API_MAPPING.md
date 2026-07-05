@@ -42,7 +42,20 @@ L'API locale expose actuellement les champs à la fois sous `acf` et à la racin
 
 ## Yoast vers `Metadata` Next.js
 
-Le connecteur utilise `json.title`, `description`, `canonical`, `robots`, les champs Open Graph et Twitter. Le graphe Schema est disponible dans la réponse Yoast mais n'est pas injecté automatiquement par l'API `Metadata` de Next.js ; une future intégration JSON-LD dédiée pourra l'exploiter.
+Le connecteur utilise `json.title`, `description`, `robots`, les champs Open Graph et Twitter. Pour les routes fixes, `seoRouteMap` traduit la route Next.js en slug de page WordPress, puis lit `yoast_head_json` dans `/wp/v2/pages`. Pour les fiches film, la même donnée provient du CPT Film.
+
+Le canonical et l'URL Open Graph sont réécrits vers le front Next.js. Le graphe Schema reste disponible dans la réponse Yoast mais n'est pas encore injecté automatiquement ; une future intégration JSON-LD dédiée pourra l'exploiter.
+
+| Route Next.js                | Slug WordPress              |
+| ---------------------------- | --------------------------- |
+| `/`                          | `accueil`                   |
+| `/association`               | `association`               |
+| `/equipe`                    | `equipe`                    |
+| `/films`                     | `films`                     |
+| `/boutique`                  | `boutique`                  |
+| `/contact`                   | `contact`                   |
+| `/mentions-legales`          | `mentions-legales`          |
+| `/politique-confidentialite` | `politique-confidentialite` |
 
 ## Repli et sécurité
 

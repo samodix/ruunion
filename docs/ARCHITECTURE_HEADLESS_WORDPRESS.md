@@ -25,8 +25,12 @@ Next.js ne fournit aucun dashboard CMS, aucune authentification admin et aucune 
 - `/boutique` → produits publics de la WooCommerce Store API ;
 - métadonnées → endpoint Yoast, avec fallback Next.js.
 
+Les routes fixes sont associées à huit pages CMS/headless WordPress. Next.js lit leur champ `yoast_head_json` via l'API Pages. Les fiches film utilisent directement les métadonnées Yoast du CPT Film. Cette stratégie évite de demander à Yoast une URL Next.js qu'il ne connaît pas.
+
 Les connecteurs n'acceptent que les hôtes locaux pendant cette phase. Le passage en production nécessitera une décision explicite sur les domaines autorisés, les canonical et la stratégie de cache.
 
 ## Prochaine étape
 
 Valider les contenus et médias dans WordPress, puis concevoir un checkout de test. Aucun paiement réel ne doit être activé avant validation fonctionnelle et sécurité.
+
+Le plugin custom est versionné séparément dans `wordpress/ruunion-core` et installé localement dans `C:\xampp\htdocs\ruunion\wp-content\plugins\ruunion-core`.

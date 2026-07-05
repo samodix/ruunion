@@ -2,13 +2,18 @@ import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
 import { Card } from "@/components/ui/Card";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { createMetadata } from "@/lib/seo";
+import { buildMetadataFromWordPressPage, createMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = createMetadata(
-  "L’équipe",
-  "Les personnes qui font vivre RU Union.",
-  "/equipe",
-);
+export async function generateMetadata(): Promise<Metadata> {
+  return buildMetadataFromWordPressPage(
+    "/equipe",
+    createMetadata(
+      "L’équipe",
+      "Les personnes qui font vivre RU Union.",
+      "/equipe",
+    ),
+  );
+}
 
 const members = [
   { initials: "MB", name: "M. Bertrand", role: "Présidence & vision" },
@@ -19,14 +24,14 @@ const members = [
 
 export default function EquipePage() {
   return (
-    <section className="py-20">
+    <section className="py-24">
       <Container>
         <SectionTitle
           eyebrow="Notre équipe"
-          title="Des regards différents, un même engagement"
-          description="Une équipe pluridisciplinaire au service de récits utiles et accessibles."
+          title="Des sensibilités réunies par un même engagement"
+          description="Des regards venus du cinéma, de la création et du monde associatif, réunis pour transformer une intention généreuse en action juste."
         />
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {members.map((member, index) => (
             <Card key={member.name} className="text-center">
               <div

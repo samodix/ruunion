@@ -3,13 +3,18 @@ import { HandHeart, Megaphone, Sparkles, Users } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { Card } from "@/components/ui/Card";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { createMetadata } from "@/lib/seo";
+import { buildMetadataFromWordPressPage, createMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = createMetadata(
-  "L’association",
-  "Découvrez la mission et la méthode de RU Union.",
-  "/association",
-);
+export async function generateMetadata(): Promise<Metadata> {
+  return buildMetadataFromWordPressPage(
+    "/association",
+    createMetadata(
+      "L’association",
+      "Découvrez la mission et la méthode de RU Union.",
+      "/association",
+    ),
+  );
+}
 
 const actions = [
   {
@@ -20,7 +25,7 @@ const actions = [
   {
     icon: Users,
     title: "Relier",
-    text: "Organiser des projections, ateliers et rencontres sur les territoires.",
+    text: "Réunir les publics, les aidants et les partenaires autour d’expériences partagées.",
   },
   {
     icon: Megaphone,
@@ -37,16 +42,16 @@ const actions = [
 export default function AssociationPage() {
   return (
     <>
-      <section className="bg-ru-soft py-20">
+      <section className="bg-ru-soft py-24">
         <Container>
           <SectionTitle
             eyebrow="L’association"
-            title="Faire œuvre commune"
-            description="RU Union est une association culturelle qui utilise l’image, la création et la rencontre pour renforcer les liens humains."
+            title="Une union au service de l’humain"
+            description="RU Union est née d’une conviction simple : les histoires peuvent ouvrir des portes, créer du lien et donner de la force à celles et ceux que la vie met à l’épreuve."
           />
         </Container>
       </section>
-      <section className="py-20">
+      <section className="py-24">
         <Container className="grid gap-7 sm:grid-cols-2">
           {actions.map(({ icon: Icon, title, text }) => (
             <Card key={title}>
@@ -57,15 +62,13 @@ export default function AssociationPage() {
           ))}
         </Container>
       </section>
-      <section className="bg-ru-primary-dark py-20 text-white">
+      <section className="bg-ru-primary-dark py-24 text-white">
         <Container className="grid gap-10 md:grid-cols-2">
-          <h2 className="text-4xl font-black">
-            Une méthode fondée sur l’écoute.
-          </h2>
+          <h2 className="text-4xl font-black">Écouter avant de raconter.</h2>
           <p className="text-lg leading-8 text-white/80">
-            Chaque projet commence par un temps de terrain. Nous identifions les
-            besoins, réunissons les partenaires et imaginons un format
-            artistique qui respecte les récits comme les personnes.
+            Chaque projet commence sur le terrain. Nous prenons le temps de
+            comprendre les réalités, de réunir les bonnes personnes et de
+            choisir une forme cinématographique respectueuse et vivante.
           </p>
         </Container>
       </section>

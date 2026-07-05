@@ -8,6 +8,8 @@ export type WordPressPage = {
   slug: string;
   title: WordPressRendered;
   content: WordPressRendered;
+  excerpt?: WordPressRendered;
+  yoast_head_json?: Record<string, unknown>;
 };
 
 export type WordPressFilmAcf = {
@@ -39,6 +41,7 @@ export type WordPressFilm = WordPressFilmAcf & {
   featured_media?: number;
   modified_gmt?: string;
   acf?: WordPressFilmAcf;
+  yoast_head_json?: Record<string, unknown>;
 };
 
 export type WordPressMedia = {

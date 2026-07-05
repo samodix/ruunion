@@ -29,6 +29,9 @@ export function Footer() {
           </div>
         </div>
       </Container>
+      <Container className="mt-10 border-t border-white/10 pt-7 text-sm text-white/55">
+        Copyright © RU Union. Tous droits réservés.
+      </Container>
     </footer>
   );
 }

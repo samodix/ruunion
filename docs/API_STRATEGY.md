@@ -8,7 +8,8 @@ Le front Next.js lit désormais les API du WordPress XAMPP local côté serveur 
 - fiche film : `GET /wp-json/wp/v2/films?slug={slug}` ;
 - médias : `GET /wp-json/wp/v2/media/{id}` ;
 - produits : `GET /wp-json/wc/store/products` ;
-- SEO : `GET /wp-json/yoast/v1/get_head?url={url}`.
+- SEO pages : `GET /wp-json/wp/v2/pages?slug={slug}` puis lecture de `yoast_head_json` ;
+- SEO films : `GET /wp-json/wp/v2/films?slug={slug}` puis lecture de `yoast_head_json`.
 
 Les pages restent dynamiques pour refléter les changements du CMS local sans reconstruction.
 
@@ -22,7 +23,7 @@ La Store API publique suffit pour le catalogue et ne nécessite aucune Consumer 
 
 ## Yoast
 
-Les titres, descriptions, robots, canonical, Open Graph et Twitter sont normalisés vers `Metadata`. Si Yoast est indisponible, les métadonnées existantes de Next.js restent actives.
+Les routes Next.js sont associées à des pages CMS/headless WordPress. Le front lit les titres, descriptions, robots, Open Graph et Twitter dans `yoast_head_json`, puis conserve ses propres URL canonical. Si Yoast ou une page est indisponible, les métadonnées existantes de Next.js restent actives.
 
 ## Sécurité
 

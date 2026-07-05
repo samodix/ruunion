@@ -37,8 +37,10 @@ Le plugin local se trouve dans `C:\xampp\htdocs\ruunion\wp-content\plugins\ruuni
 - l'exposition REST des champs Films ;
 - les quatre films de démonstration ;
 - les catégories et six produits WooCommerce de démonstration.
+- les huit pages CMS/headless et leurs métadonnées Yoast ;
+- la personnalisation légère de `wp-admin` et cinq widgets dashboard.
 
-Les fichiers WordPress et ce plugin local ne font pas partie du dépôt Next.js.
+Une copie volontaire du plugin est versionnée dans `wordpress/ruunion-core`. Le reste des fichiers WordPress ne fait pas partie du dépôt Next.js.
 
 ## Endpoints vérifiés
 
@@ -57,6 +59,8 @@ Tous ces endpoints ont répondu HTTP 200 le 5 juillet 2026 :
 Le front consomme maintenant les endpoints Films, Store API et Yoast côté serveur. Le fichier `.env.local`, ignoré par Git, contient uniquement les URL locales. Si Apache ou MySQL est arrêté, les films et produits reviennent automatiquement aux mocks JSON sans interrompre le front.
 
 Les variables nécessaires sont documentées dans `.env.example`, notamment `WORDPRESS_API_URL`, `WOOCOMMERCE_STORE_API_URL` et `YOAST_API_URL`.
+
+Le SEO des routes fixes utilise les pages CMS/headless via `/wp-json/wp/v2/pages?slug={slug}`. Les pages peuvent être éditées dans WordPress, y compris leur bloc Yoast.
 
 ## Sécurité locale
 

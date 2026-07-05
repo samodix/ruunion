@@ -17,7 +17,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className="h-full scroll-smooth">
+    <html
+      lang="fr"
+      className="h-full scroll-smooth"
+      data-scroll-behavior="smooth"
+    >
       <body className="flex min-h-full flex-col antialiased">
         <SiteFrame>{children}</SiteFrame>
       </body>
