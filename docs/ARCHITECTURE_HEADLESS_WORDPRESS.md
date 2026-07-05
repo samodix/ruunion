@@ -1,51 +1,32 @@
 # Architecture headless WordPress
 
-## Répartition des responsabilités
+## WordPress local
 
-### WordPress local, puis future production
+WordPress est le CMS et l'unique back-office éditorial : CPT Films, champs ACF, médias, produits WooCommerce et métadonnées Yoast.
 
-WordPress est le CMS et l'unique back-office éditorial :
+## Next.js
 
-- administration via `wp-admin` ;
-- CPT Films, champs ACF et médias ;
-- WooCommerce et produits de soutien ;
-- SEO via Yoast SEO ;
-- comptes, rôles et opérations éditoriales.
+Next.js reste le front public et assure :
 
-### Next.js
+- le design, les composants et le routage ;
+- le rendu des films et produits issus des API locales ;
+- la normalisation des réponses WordPress, WooCommerce et Yoast ;
+- les filtres de visibilité et les tris éditoriaux ;
+- le fallback mock si XAMPP est arrêté ;
+- le rendu SEO et les performances du front.
 
-Next.js reste exclusivement le front public :
+Next.js ne fournit aucun dashboard CMS, aucune authentification admin et aucune route CRUD admin. `/admin` redirige vers `http://localhost/ruunion/wp-admin/`.
 
-- design, composants et routage ;
-- rendu SEO et performance ;
-- lecture future des API WordPress, WooCommerce et Yoast ;
-- mocks locaux tant que le branchement réel n'est pas activé.
+## Flux actuels
 
-Next.js ne fournit plus de dashboard CMS, d'authentification admin ni de routes CRUD admin.
+- accueil → films WordPress publics, mis en avant et visibles sur l'accueil ;
+- `/films` → collection du CPT Films ;
+- `/films/[slug]` → recherche REST par slug ;
+- `/boutique` → produits publics de la WooCommerce Store API ;
+- métadonnées → endpoint Yoast, avec fallback Next.js.
 
-## URLs locales
+Les connecteurs n'acceptent que les hôtes locaux pendant cette phase. Le passage en production nécessitera une décision explicite sur les domaines autorisés, les canonical et la stratégie de cache.
 
-- Front public : `http://localhost:3000`
-- WordPress : `http://localhost/ruunion`
-- CMS : `http://localhost/ruunion/wp-admin/`
-- REST WordPress : `http://localhost/ruunion/wp-json`
-- Films : `http://localhost/ruunion/wp-json/wp/v2/films`
-- Store API : `http://localhost/ruunion/wp-json/wc/store/products`
-- REST WooCommerce admin future : `http://localhost/ruunion/wp-json/wc/v3`
-- Yoast : `http://localhost/ruunion/wp-json/yoast/v1/get_head`
+## Prochaine étape
 
-La route Next.js `/admin` effectue une redirection serveur vers le CMS local.
-
-## Transition des données
-
-Les pages publiques lisent encore `storage/*.json` en lecture seule. Les adaptateurs `src/lib/wordpress.ts` et `src/lib/woocommerce.ts` exposent les fonctions cibles, mais n'effectuent encore aucun appel réseau réel.
-
-Prochain branchement :
-
-1. mapper `/films` et `/films/[slug]` vers le CPT Films ;
-2. mapper `/boutique` vers la Store API WooCommerce publique ;
-3. mapper les métadonnées vers l'endpoint Yoast ;
-4. valider les réponses, gérer les erreurs et ajouter la revalidation Next.js ;
-5. conserver les opérations d'administration dans `wp-admin`.
-
-La Store API publique ne requiert pas de Consumer Key pour lire le catalogue. Toute future opération WooCommerce administrative utilisera des secrets serveur dans `.env.local`, jamais dans Git.
+Valider les contenus et médias dans WordPress, puis concevoir un checkout de test. Aucun paiement réel ne doit être activé avant validation fonctionnelle et sécurité.

@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import { FilmDonationBox } from "@/components/films/FilmDonationBox";
 import { FilmHero } from "@/components/films/FilmHero";
 import { Container } from "@/components/layout/Container";
+import { buildMetadataFromYoastOrFallback, createMetadata } from "@/lib/seo";
 import { getWordPressFilmBySlug } from "@/lib/wordpress";
-import { createMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
@@ -14,13 +14,18 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const film = await getWordPressFilmBySlug((await params).slug);
-  return film && film.publicVisibility
-    ? createMetadata(
-        film.seoTitle || film.title,
-        film.seoDescription || film.shortDescription,
-        `/films/${film.slug}`,
-      )
-    : {};
+  if (!film || !film.publicVisibility) return {};
+
+  const wordpressBaseUrl =
+    process.env.WORDPRESS_BASE_URL?.trim() || "http://localhost/ruunion";
+  return buildMetadataFromYoastOrFallback(
+    `${wordpressBaseUrl}/films/${film.slug}/`,
+    createMetadata(
+      film.seoTitle || film.title,
+      film.seoDescription || film.shortDescription,
+      `/films/${film.slug}`,
+    ),
+  );
 }
 
 export default async function FilmDetailPage({
@@ -30,6 +35,7 @@ export default async function FilmDetailPage({
 }) {
   const film = await getWordPressFilmBySlug((await params).slug);
   if (!film || !film.publicVisibility) notFound();
+
   return (
     <>
       <section className="bg-ru-soft py-20">
@@ -55,7 +61,7 @@ export default async function FilmDetailPage({
                 <p className="text-ru-muted">Galerie bientôt disponible.</p>
               )}
             </div>
-            <h2 className="mt-14 text-3xl font-black">Pourquoi ce film ?</h2>
+            <h2 className="mt-14 text-3xl font-black">Pourquoi ce film ?</h2>
             <p className="text-ru-muted mt-5 max-w-3xl text-lg leading-8">
               Ce projet est conçu avec ses futurs publics. Les soutiens
               financent l’écriture, le tournage, la postproduction et des

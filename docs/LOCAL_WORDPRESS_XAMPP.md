@@ -52,6 +52,12 @@ Tous ces endpoints ont répondu HTTP 200 le 5 juillet 2026 :
 - `http://localhost/ruunion/wp-json/wc/store/v1/products`
 - `http://localhost/ruunion/wp-json/yoast/v1/get_head?url=http://localhost/ruunion/`
 
+## Connexion au front Next.js
+
+Le front consomme maintenant les endpoints Films, Store API et Yoast côté serveur. Le fichier `.env.local`, ignoré par Git, contient uniquement les URL locales. Si Apache ou MySQL est arrêté, les films et produits reviennent automatiquement aux mocks JSON sans interrompre le front.
+
+Les variables nécessaires sont documentées dans `.env.example`, notamment `WORDPRESS_API_URL`, `WOOCOMMERCE_STORE_API_URL` et `YOAST_API_URL`.
+
 ## Sécurité locale
 
 - `wp-config.php`, mots de passe, clés API et exports SQL ne doivent jamais être versionnés ;
