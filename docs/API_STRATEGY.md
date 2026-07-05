@@ -1,5 +1,9 @@
 # Stratégie API
 
+## API admin locale
+
+Les routes Next.js sous `/api/admin` utilisent exclusivement `storage/*.json` avec `fs/promises` côté serveur. Elles sont protégées par un cookie de démonstration qui devra être remplacé par Auth.js, WordPress JWT ou Supabase Auth.
+
 ## État initial
 
 Les modules `wordpress.ts`, `woocommerce.ts`, `stripe.ts` et `paypal.ts` sont des adaptateurs inactifs. Ils ne réalisent aucun appel réseau et ne contiennent aucun secret.

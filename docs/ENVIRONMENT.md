@@ -1,5 +1,13 @@
 # Environnement
 
+## Back-office de démonstration
+
+- URL : `http://localhost:3000/admin`
+- Email : `admin@ruunion.com`
+- Mot de passe : `RuUnion@2026`
+
+Ces valeurs sont volontairement publiques et locales. Elles ne doivent pas être réutilisées pour un compte réel.
+
 ## Prérequis
 
 - Node.js 20.19 ou version LTS supérieure recommandée

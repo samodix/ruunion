@@ -1,5 +1,7 @@
 # Lots RU Union
 
+Le CRUD local Films/Packs et sa synchronisation front préparent les lots 1, 7, 8 et 16 sans connexion à une API de production.
+
 | Lot | Intitulé                               | Résultat attendu                                    |
 | --- | -------------------------------------- | --------------------------------------------------- |
 | 0   | Page « Site en construction »          | Présence temporaire claire et accessible            |

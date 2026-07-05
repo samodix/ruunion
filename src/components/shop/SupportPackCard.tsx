@@ -7,7 +7,9 @@ export function SupportPackCard({ pack }: { pack: SupportPack }) {
   return (
     <Card
       className={
-        pack.featured ? "border-ru-primary-dark ring-ru-primary/25 ring-2" : ""
+        pack.isHighlighted
+          ? "border-ru-primary-dark ring-ru-primary/25 ring-2"
+          : ""
       }
     >
       <div className="flex items-start justify-between gap-4">
@@ -19,7 +21,7 @@ export function SupportPackCard({ pack }: { pack: SupportPack }) {
             {formatCurrency(pack.price)}
           </p>
         </div>
-        {pack.featured && (
+        {pack.isHighlighted && (
           <span className="bg-ru-yellow rounded-full px-3 py-1 text-xs font-black">
             Populaire
           </span>
@@ -27,10 +29,10 @@ export function SupportPackCard({ pack }: { pack: SupportPack }) {
       </div>
       <p className="text-ru-muted mt-5 leading-7">{pack.description}</p>
       <ul className="mt-6 space-y-3">
-        {pack.benefits.map((benefit) => (
-          <li key={benefit} className="flex gap-3 text-sm">
+        {pack.features.map((feature) => (
+          <li key={feature} className="flex gap-3 text-sm">
             <Check className="text-ru-primary-dark shrink-0" size={19} />
-            {benefit}
+            {feature}
           </li>
         ))}
       </ul>

@@ -1,5 +1,9 @@
 # Plan du projet RU Union
 
+## Back-office local de recette
+
+Le back-office mock sous `/admin` valide les modèles Film et SupportPack, les formulaires, les filtres et la synchronisation front avant le choix du CMS ou de la base définitive. Le stockage JSON et l’authentification de démonstration devront être remplacés avant production.
+
 ## Vision
 
 RU Union utilise le cinéma, les rencontres et les actions culturelles pour renforcer les liens humains. La plateforme doit rendre les projets compréhensibles, désirables et faciles à soutenir.

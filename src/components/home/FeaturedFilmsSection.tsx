@@ -1,10 +1,10 @@
+import type { Film } from "@/types/film";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { FilmGrid } from "@/components/films/FilmGrid";
-import { featuredFilms } from "@/data/films";
 
-export function FeaturedFilmsSection() {
+export function FeaturedFilmsSection({ films }: { films: Film[] }) {
   return (
     <section className="bg-ru-soft py-24">
       <Container>
@@ -19,7 +19,7 @@ export function FeaturedFilmsSection() {
             Tous les films
           </Button>
         </div>
-        <FilmGrid className="mt-12" films={featuredFilms} />
+        <FilmGrid className="mt-12" films={films} />
       </Container>
     </section>
   );
