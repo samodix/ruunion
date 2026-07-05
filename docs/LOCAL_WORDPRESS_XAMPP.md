@@ -1,61 +1,59 @@
 # WordPress local avec XAMPP
 
-Cette procédure concerne exclusivement le poste local. Elle ne doit jamais être utilisée avec le WordPress Namecheap distant.
+Cette installation concerne exclusivement le poste local. Le WordPress Namecheap distant reste hors périmètre.
 
-## Repères locaux
+## État installé
 
-- Dossier WordPress recommandé : `C:\xampp\htdocs\ruunion`
-- Site WordPress : `http://localhost/ruunion`
-- Administration : `http://localhost/ruunion/wp-admin`
-- Base MySQL recommandée : `ruunion_wp`
-- phpMyAdmin : `http://localhost/phpmyadmin`
+- WordPress : 7.0
+- Dossier réel : `C:\xampp\htdocs\ruunion`
+- URL : `http://localhost/ruunion`
+- Administration : `http://localhost/ruunion/wp-admin/`
+- Base MariaDB : `ruunion_wp`, encodage `utf8mb4`, collation `utf8mb4_unicode_ci`
+- PHP : 8.2.12
+- MariaDB : 10.4.32
+- Permaliens : `/%postname%/`
 
-## Installation
+Apache utilise ici une racine personnalisée `E:\htdocs`. Une jonction locale `E:\htdocs\ruunion` pointe donc vers le dossier WordPress demandé dans `C:\xampp\htdocs\ruunion`. La configuration Apache et les autres sites locaux n'ont pas été modifiés.
 
-1. Démarrer Apache et MySQL depuis le panneau XAMPP.
-2. Ouvrir phpMyAdmin et créer une base vide nommée `ruunion_wp` avec un encodage `utf8mb4`.
-3. Télécharger WordPress depuis le site officiel.
-4. Décompresser WordPress dans `C:\xampp\htdocs\ruunion`.
-5. Ouvrir `http://localhost/ruunion` et suivre l'assistant d'installation.
-6. Se connecter ensuite à `http://localhost/ruunion/wp-admin`.
+WordPress recommande actuellement PHP 8.3+ et MariaDB 10.6+ ou MySQL 8.0+. Les versions XAMPP présentes fonctionnent pour ce développement local, mais une mise à niveau est recommandée avant d'en faire un environnement durable.
 
-Ne jamais versionner `wp-config.php`, des mots de passe, des clés API ou des sauvegardes de base de données.
+## Extensions
 
-## Extensions locales recommandées
+- WooCommerce : actif, devise EUR, pays France ;
+- Advanced Custom Fields : actif ;
+- Yoast SEO : actif, organisation `RU Union` ;
+- RU Union Core : actif ;
+- LiteSpeed Cache : installé et actif, mais le cache serveur LiteSpeed n'est pas disponible sous Apache XAMPP ;
+- aucun plugin de paiement réel n'est configuré.
 
-- WooCommerce pour les packs de soutien.
-- Yoast SEO ou Rank Math pour les métadonnées.
-- ACF pour les champs Films.
-- Custom Post Type UI, optionnel, pour créer le CPT sans code.
-- WP REST API Controller, optionnel, pour maîtriser les champs exposés.
-- Application Passwords (natif WordPress) ou JWT Auth plus tard, pour les opérations API authentifiées.
-- LiteSpeed Cache seulement si le serveur local le permet ; sinon choisir un cache compatible avec Apache/XAMPP. Le cache n'est pas prioritaire en développement.
+Tous les moyens de paiement WooCommerce intégrés ont été explicitement désactivés. Aucune clé Stripe, PayPal ou WooCommerce n'a été créée.
 
-## CPT Films
+## RU Union Core
 
-Créer un type de contenu `Films` avec le slug `films`, l'API REST activée (`show_in_rest`) et les supports suivants : titre, éditeur, image mise en avant, extrait et champs personnalisés.
+Le plugin local se trouve dans `C:\xampp\htdocs\ruunion\wp-content\plugins\ruunion-core`. Il enregistre :
 
-Champs ACF à prévoir :
+- le CPT `film`, REST base `films`, archive `/films` ;
+- les 16 champs du groupe ACF « Informations du film » ;
+- l'exposition REST des champs Films ;
+- les quatre films de démonstration ;
+- les catégories et six produits WooCommerce de démonstration.
 
-- synopsis court et synopsis long ;
-- année et statut ;
-- affiche, bande-annonce et galerie ;
-- objectif de dons et montant collecté ;
-- mis en avant et priorité ;
-- visible publiquement et visible sur l'accueil ;
-- produit ou pack WooCommerce lié.
+Les fichiers WordPress et ce plugin local ne font pas partie du dépôt Next.js.
 
-## WooCommerce
+## Endpoints vérifiés
 
-Créer les packs de soutien comme produits et prévoir les catégories `Soutien`, `Film` et `Mécénat`. Stripe et PayPal seront configurés ultérieurement, d'abord en environnement de test. Aucune clé de paiement ne doit entrer dans Git.
+Tous ces endpoints ont répondu HTTP 200 le 5 juillet 2026 :
 
-## SEO
+- `http://localhost/ruunion/`
+- `http://localhost/ruunion/wp-admin/`
+- `http://localhost/ruunion/wp-json/`
+- `http://localhost/ruunion/wp-json/wp/v2/films`
+- `http://localhost/ruunion/wp-json/wc/store/products`
+- `http://localhost/ruunion/wp-json/wc/store/v1/products`
+- `http://localhost/ruunion/wp-json/yoast/v1/get_head?url=http://localhost/ruunion/`
 
-Yoast SEO ou Rank Math gère les métadonnées dans WordPress. Le front Next.js les récupérera plus tard via l'API et les transformera en métadonnées Next.js.
+## Sécurité locale
 
-## Vérification avant connexion au front
-
-- `http://localhost/ruunion/wp-json` répond localement ;
-- le CPT Films apparaît dans `wp-json/wp/v2` ;
-- les produits WooCommerce de démonstration sont visibles ;
-- aucune URL, clé ou donnée Namecheap n'est utilisée.
+- `wp-config.php`, mots de passe, clés API et exports SQL ne doivent jamais être versionnés ;
+- ne pas connecter Search Console, Stripe, PayPal ou un service distant pendant cette phase ;
+- ne jamais réutiliser cette configuration pour le site Namecheap.

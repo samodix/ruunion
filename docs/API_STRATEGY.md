@@ -2,21 +2,35 @@
 
 ## État actuel
 
-Le front utilise des mocks JSON locaux en lecture seule. Il n'existe plus de routes `/api/admin`, d'authentification admin ou de CRUD Next.js. Aucun appel WordPress, WooCommerce, Stripe ou PayPal n'est exécuté.
+Le CMS WordPress XAMPP est opérationnel, mais le front Next.js continue volontairement d'utiliser ses mocks JSON locaux en lecture seule. Aucun appel WordPress ou WooCommerce réel n'est encore exécuté par Next.js.
 
-## WordPress
+## WordPress Films
 
-L'adaptateur `src/lib/wordpress.ts` prépare les fonctions de pages, films, médias et SEO. La connexion future sera réalisée côté serveur vers `WORDPRESS_API_URL`, avec validation des réponses, cache et revalidation.
+- Endpoint testé : `GET /wp-json/wp/v2/films`
+- Quatre films de démonstration sont disponibles.
+- Les 16 champs RU Union sont exposés directement dans chaque objet REST.
+- L'adaptateur `src/lib/wordpress.ts` préparera le mapping vers les types `Film` existants.
+
+Le branchement devra valider les réponses, filtrer `visible_public`, trier `priorite_affichage` et utiliser la revalidation côté serveur.
 
 ## WooCommerce
 
-L'adaptateur `src/lib/woocommerce.ts` prépare la lecture des produits, des packs et la future création d'une URL de checkout. Les clés consommateur resteront exclusivement dans l'environnement serveur.
+- Endpoint public testé : `GET /wp-json/wc/store/products`
+- Endpoint versionné disponible : `GET /wp-json/wc/store/v1/products`
+- Six produits de démonstration sont disponibles en EUR.
+
+La Store API servira au catalogue public sans clé. `WOOCOMMERCE_API_URL` et d'éventuelles Consumer Keys sont réservés à de futures opérations serveur administratives ; aucune clé n'est actuellement créée.
+
+## Yoast SEO
+
+Endpoint testé : `GET /wp-json/yoast/v1/get_head?url=http://localhost/ruunion/`.
+
+Next.js pourra transformer les métadonnées Yoast en objets `Metadata` lors du branchement réel.
 
 ## Sécurité
 
-- aucune écriture depuis le navigateur vers WordPress ;
-- validation des réponses et entrées aux frontières ;
+- aucune écriture WordPress depuis le navigateur Next.js ;
+- aucun paiement réel ni clé Stripe/PayPal ;
+- validation des réponses aux frontières ;
 - aucun secret dans Git ;
-- journalisation sans données sensibles ;
-- environnements de test pour Stripe et PayPal ;
-- aucune connexion au WordPress Namecheap pendant le développement local.
+- aucune connexion au WordPress Namecheap.

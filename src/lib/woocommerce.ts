@@ -3,7 +3,11 @@ import { getMockSupportPacks } from "@/lib/public-content";
 import type { SupportPack } from "@/types/support-pack";
 import type { WooCommerceProduct } from "@/types/woocommerce";
 
+const wooCommerceStoreApiUrl = process.env.WOOCOMMERCE_STORE_API_URL?.trim();
 const wooCommerceApiUrl = process.env.WOOCOMMERCE_API_URL?.trim();
+const wooCommerceConfigured = Boolean(
+  wooCommerceStoreApiUrl || wooCommerceApiUrl,
+);
 
 function toWooProduct(pack: SupportPack, index: number): WooCommerceProduct {
   return {
@@ -18,8 +22,8 @@ function toWooProduct(pack: SupportPack, index: number): WooCommerceProduct {
 /** Adaptateur mock : aucun appel WooCommerce réel n'est exécuté pour l'instant. */
 export async function getWooProducts(): Promise<WooCommerceProduct[]> {
   const packs = await getMockSupportPacks();
-  if (!wooCommerceApiUrl) return packs.map(toWooProduct);
-  // TODO : appeler /products côté serveur après configuration des identifiants.
+  if (!wooCommerceConfigured) return packs.map(toWooProduct);
+  // TODO : lire /wc/store/products côté serveur, sans clé, pour le catalogue public.
   return packs.map(toWooProduct);
 }
 
@@ -32,7 +36,7 @@ export async function getWooProductBySlug(
 }
 
 export async function getWooSupportPacks(): Promise<SupportPack[]> {
-  if (!wooCommerceApiUrl) return getMockSupportPacks();
+  if (!wooCommerceConfigured) return getMockSupportPacks();
   // TODO : mapper les produits des catégories Soutien, Film et Mécénat.
   return getMockSupportPacks();
 }
