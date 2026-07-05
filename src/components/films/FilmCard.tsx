@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Clapperboard } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Clapperboard, Heart } from "lucide-react";
 import type { Film, FilmStatus } from "@/types/film";
 import { formatCurrency } from "@/lib/utils";
 
@@ -26,16 +26,22 @@ export function FilmCard({ film }: { film: Film }) {
   return (
     <article className="group border-ru-border overflow-hidden rounded-[2.25rem] border bg-white shadow-[0_18px_60px_rgba(51,54,58,.08)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_28px_90px_rgba(14,154,139,.16)]">
       <div
-        className={`relative h-64 overflow-hidden bg-gradient-to-br ${accent} p-6`}
+        className={`relative h-72 overflow-hidden bg-gradient-to-br bg-cover bg-center sm:h-80 ${accent} p-6`}
+        style={
+          film.poster ? { backgroundImage: `url(${film.poster})` } : undefined
+        }
       >
+        <div className="from-ru-ink/75 absolute inset-0 bg-gradient-to-t via-transparent to-transparent" />
         <div className="absolute inset-0 bg-[linear-gradient(120deg,transparent_35%,rgba(255,255,255,.22)_50%,transparent_65%)] opacity-0 transition duration-700 group-hover:translate-x-24 group-hover:opacity-100" />
         <span className="text-ru-ink relative rounded-full bg-white/92 px-3 py-2 text-xs font-extrabold shadow-sm">
           {statusLabels[film.status]}
         </span>
-        <Clapperboard
-          className="absolute bottom-7 left-7 text-white/65"
-          size={42}
-        />
+        {!film.poster && (
+          <Clapperboard
+            className="absolute bottom-7 left-7 text-white/65"
+            size={42}
+          />
+        )}
         <div className="text-ru-primary-dark absolute right-6 bottom-6 grid size-13 place-items-center rounded-full bg-white shadow-xl transition group-hover:scale-105 group-hover:rotate-12">
           <ArrowUpRight />
         </div>
@@ -64,12 +70,20 @@ export function FilmCard({ film }: { film: Film }) {
             </div>
           </div>
         )}
-        <Link
-          href={`/films/${film.slug}`}
-          className="text-ru-primary-dark mt-7 inline-flex font-extrabold"
-        >
-          Entrer dans l’histoire
-        </Link>
+        <div className="mt-7 flex flex-wrap gap-3">
+          <Link
+            href={`/films/${film.slug}`}
+            className="bg-ru-primary-dark inline-flex items-center rounded-full px-5 py-3 text-sm font-extrabold text-white transition hover:-translate-y-0.5"
+          >
+            Découvrir <ArrowRight className="ml-2" size={16} />
+          </Link>
+          <Link
+            href="/boutique"
+            className="border-ru-border text-ru-ink hover:bg-ru-soft inline-flex items-center rounded-full border px-5 py-3 text-sm font-extrabold transition"
+          >
+            Soutenir <Heart className="ml-2" size={16} />
+          </Link>
+        </div>
       </div>
     </article>
   );

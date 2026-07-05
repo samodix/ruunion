@@ -1,5 +1,12 @@
 # Mapping des API locales
 
+## Consommation par l’interface publique
+
+- Le hero et la section « Films en lumière » utilisent les films WordPress publics, visibles sur l’accueil et mis en avant, triés par `priorite_affichage`.
+- Les affiches et galeries WordPress sont rendues lorsqu’elles sont disponibles ; une illustration CSS locale sert de fallback.
+- L’accueil et la boutique utilisent les packs normalisés depuis la Store API WooCommerce. Les filtres s’appuient sur le type dérivé des catégories produit.
+- Les collections mock de `src/data` restent la source de secours lorsque WordPress ou WooCommerce local est indisponible.
+
 ## CPT Film WordPress vers `Film` Next.js
 
 | WordPress / ACF                            | Next.js              | Traitement                          |

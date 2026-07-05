@@ -1,5 +1,9 @@
 # Architecture headless WordPress
 
+## Couche de présentation publique
+
+La direction UI est décrite dans `docs/UI_DIRECTION.md`. Les composants Next.js ne dupliquent pas les contenus métier : ils reçoivent les films normalisés depuis WordPress et les packs normalisés depuis WooCommerce. Les compositions graphiques sans média sont des fallbacks de présentation et ne remplacent pas les données du CMS.
+
 ## WordPress local
 
 WordPress est le CMS et l'unique back-office éditorial : CPT Films, champs ACF, médias, produits WooCommerce et métadonnées Yoast.

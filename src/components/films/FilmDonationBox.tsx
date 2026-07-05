@@ -9,15 +9,18 @@ export function FilmDonationBox({ film }: { film: Film }) {
     goal > 0 ? Math.min(100, Math.round((collected / goal) * 100)) : 0;
 
   return (
-    <aside className="bg-ru-ink sticky top-24 rounded-[2.25rem] p-8 text-white shadow-[0_24px_70px_rgba(51,54,58,.2)]">
+    <aside className="bg-ru-ink relative sticky top-28 overflow-hidden rounded-[2.25rem] p-8 text-white shadow-[0_28px_80px_rgba(51,54,58,.22)]">
+      <div className="bg-ru-primary/20 absolute -top-20 -right-16 size-48 rounded-full blur-2xl" />
       <p className="text-ru-primary text-sm font-bold tracking-wide uppercase">
         La collecte du film
       </p>
-      <p className="mt-3 text-4xl font-black">{formatCurrency(collected)}</p>
+      <p className="relative mt-3 text-4xl font-black">
+        {formatCurrency(collected)}
+      </p>
       <p className="mt-1 text-sm text-white/55">
         réunis sur un objectif de {formatCurrency(goal)}
       </p>
-      <div className="mt-7 h-3.5 overflow-hidden rounded-full bg-white/12">
+      <div className="relative mt-7 h-3.5 overflow-hidden rounded-full bg-white/12">
         <div
           className="from-ru-primary to-ru-yellow h-full rounded-full bg-gradient-to-r"
           style={{ width: `${progress}%` }}

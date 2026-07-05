@@ -1,5 +1,13 @@
 # Plan du projet RU Union
 
+## Interface publique cinématographique
+
+- Accueil narratif : hero connecté au film prioritaire, mission, films, packs, valeurs et CTA final.
+- Boutique : produits WooCommerce filtrables par type, sans paiement réel.
+- Films : cartes, détails et collecte dans une direction plus immersive.
+- Navigation : header responsive et footer éditorial RU Union.
+- Référence complète : `docs/UI_DIRECTION.md`.
+
 ## Architecture retenue
 
 WordPress local sous XAMPP est le back-office éditorial. Next.js est uniquement le front public. Les mocks JSON restent temporairement disponibles en lecture seule jusqu'au branchement des API WordPress et WooCommerce.

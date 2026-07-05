@@ -1,51 +1,70 @@
-import { Clapperboard, HandHeart, Users } from "lucide-react";
+import { Clapperboard, HandHeart, Link2, Quote } from "lucide-react";
 import { Container } from "@/components/layout/Container";
-import { Card } from "@/components/ui/Card";
-import { SectionTitle } from "@/components/ui/SectionTitle";
 
 const missions = [
   {
     icon: Clapperboard,
-    title: "Raconter avec justesse",
-    text: "Porter à l’écran des histoires sensibles, ancrées dans le réel et racontées avec les personnes concernées.",
+    title: "Raconter",
+    text: "Donner une voix aux parcours humains.",
   },
   {
-    icon: Users,
-    title: "Relier les regards",
-    text: "Faire dialoguer les publics, les aidants, les artistes et les partenaires autour d’une expérience commune.",
+    icon: Link2,
+    title: "Relier",
+    text: "Créer un lien entre les spectateurs, les familles, les aidants et les partenaires.",
   },
   {
     icon: HandHeart,
-    title: "Transformer l’émotion",
-    text: "Prolonger chaque film par une collecte, une rencontre ou une action qui produit un effet concret.",
+    title: "Soutenir",
+    text: "Transformer chaque contribution en action utile.",
   },
 ];
 
 export function MissionSection() {
   return (
-    <section className="py-28">
+    <section className="bg-ru-cream relative overflow-hidden py-24 sm:py-32">
       <Container>
-        <SectionTitle
-          as="h2"
-          eyebrow="Notre mouvement"
-          title="Le cinéma peut devenir une forme de présence"
-          description="Nous croyons aux récits qui ne s’arrêtent pas au générique : ils circulent, rapprochent et donnent envie d’agir."
-        />
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:gap-20">
+          <div>
+            <p className="text-ru-primary-dark text-sm font-black tracking-[.2em] uppercase">
+              Notre mouvement
+            </p>
+            <h2 className="mt-5 text-4xl leading-[1.02] font-black tracking-[-.045em] sm:text-6xl">
+              Une histoire peut devenir un élan
+            </h2>
+          </div>
+          <div className="border-ru-border relative border-l pl-8 sm:pl-12">
+            <Quote
+              className="text-ru-yellow bg-ru-cream absolute -top-2 -left-5 p-2"
+              size={42}
+              aria-hidden="true"
+            />
+            <p className="text-ru-muted text-xl leading-9 sm:text-2xl sm:leading-10">
+              Derrière chaque projet RU Union, il y a une rencontre, une
+              fragilité, une force et une envie de transmettre. Le cinéma permet
+              de rendre visibles ces histoires et de transformer l’émotion en
+              soutien concret.
+            </p>
+          </div>
+        </div>
+
+        <div className="relative mt-16 grid gap-5 md:grid-cols-3">
+          <div className="from-ru-primary to-ru-yellow absolute top-12 right-[16%] left-[16%] hidden h-px bg-gradient-to-r md:block" />
           {missions.map(({ icon: Icon, title, text }, index) => (
-            <Card
+            <article
               key={title}
-              className="group relative overflow-hidden p-8 transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(14,154,139,.12)]"
+              className="border-ru-border group relative rounded-[2rem] border bg-white p-7 shadow-[0_16px_50px_rgba(51,54,58,.05)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(14,154,139,.1)] sm:p-8"
             >
-              <span className="text-ru-border absolute top-4 right-6 text-6xl font-black">
-                0{index + 1}
-              </span>
-              <span className="bg-ru-primary/15 text-ru-primary-dark relative grid size-14 place-items-center rounded-2xl">
-                <Icon size={27} />
-              </span>
-              <h3 className="relative mt-7 text-2xl font-black">{title}</h3>
-              <p className="text-ru-muted relative mt-4 leading-7">{text}</p>
-            </Card>
+              <div className="relative flex items-center justify-between">
+                <span className="bg-ru-primary-dark text-ru-cream shadow-ru-primary/15 grid size-14 place-items-center rounded-2xl shadow-lg">
+                  <Icon size={25} />
+                </span>
+                <span className="text-ru-border text-5xl font-black">
+                  0{index + 1}
+                </span>
+              </div>
+              <h3 className="mt-7 text-2xl font-black">{title}</h3>
+              <p className="text-ru-muted mt-3 leading-7">{text}</p>
+            </article>
           ))}
         </div>
       </Container>

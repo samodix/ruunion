@@ -5,8 +5,8 @@ import { navigation } from "@/data/navigation";
 
 export function Header() {
   return (
-    <header className="border-ru-border/80 bg-ru-cream/95 sticky top-0 z-50 border-b backdrop-blur">
-      <Container className="flex min-h-20 items-center justify-between gap-6">
+    <header className="border-ru-border/80 bg-ru-cream/88 sticky top-0 z-50 border-b backdrop-blur-xl">
+      <Container className="flex min-h-20 items-center justify-between gap-3 sm:gap-6">
         <Link
           href="/"
           className="flex items-center gap-3"
@@ -15,7 +15,7 @@ export function Header() {
           <span className="bg-ru-primary-dark shadow-ru-primary/20 grid size-11 place-items-center rounded-2xl text-white shadow-lg">
             <HeartHandshake aria-hidden="true" size={23} />
           </span>
-          <span>
+          <span className="hidden sm:block">
             <strong className="block text-lg leading-none">RU Union</strong>
             <small className="text-ru-muted mt-1 block text-xs">
               L’union des plus humains
@@ -37,10 +37,11 @@ export function Header() {
           ))}
         </nav>
         <Link
-          href="/films"
-          className="bg-ru-primary-dark hover:bg-ru-ink rounded-full px-5 py-3 text-sm font-bold text-white transition"
+          href="/boutique"
+          className="bg-ru-primary-dark hover:bg-ru-ink shadow-ru-primary/15 rounded-full px-4 py-3 text-sm font-bold text-white shadow-lg transition sm:px-5"
         >
-          Soutenir un film
+          <span className="sm:hidden">Soutenir</span>
+          <span className="hidden sm:inline">Soutenir RU Union</span>
         </Link>
       </Container>
     </header>

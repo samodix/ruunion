@@ -1,26 +1,31 @@
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import type { SupportPack } from "@/types/support-pack";
 import { Container } from "@/components/layout/Container";
+import { SupportPackCard } from "@/components/shop/SupportPackCard";
 import { Button } from "@/components/ui/Button";
+import { SectionTitle } from "@/components/ui/SectionTitle";
 
-export function SupportSection() {
+export function SupportSection({ packs }: { packs: SupportPack[] }) {
   return (
-    <section className="py-28">
-      <Container>
-        <div className="bg-ru-primary-dark relative isolate overflow-hidden rounded-[3rem] px-8 py-16 text-white shadow-[0_30px_100px_rgba(14,154,139,.18)] sm:px-16 sm:py-20">
-          <div className="bg-ru-yellow/25 absolute -top-24 -right-16 -z-10 size-80 rounded-full blur-2xl" />
-          <div className="bg-ru-primary absolute -bottom-28 -left-16 -z-10 size-72 rounded-full opacity-25 blur-3xl" />
-          <Sparkles className="text-ru-yellow" size={36} />
-          <h2 className="mt-6 max-w-3xl text-4xl font-black tracking-[-.04em] sm:text-6xl">
-            Une contribution peut ouvrir la prochaine scène.
-          </h2>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-white/78">
-            Choisissez un pack de soutien et participez au développement des
-            films comme aux actions de RU Union. Chaque geste rapproche une
-            histoire de son public.
-          </p>
-          <Button className="mt-9" href="/boutique" variant="dark">
-            Découvrir les packs <ArrowRight className="ml-2" size={18} />
+    <section className="from-ru-soft via-ru-cream to-ru-primary/8 relative overflow-hidden bg-gradient-to-br py-24 sm:py-32">
+      <div className="bg-ru-yellow/18 absolute -top-36 -right-28 size-[30rem] rounded-full blur-3xl" />
+      <div className="ru-grid-pattern absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_75%,transparent)] opacity-40" />
+      <Container className="relative">
+        <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+          <SectionTitle
+            as="h2"
+            eyebrow="Packs de soutien"
+            title="Choisir un pack, soutenir une histoire"
+            description="Chaque pack participe au développement des films et des actions RU Union. Un geste simple peut aider une histoire à voir le jour."
+          />
+          <Button href="/boutique" variant="secondary">
+            Voir tous les packs <ArrowRight className="ml-2" size={18} />
           </Button>
+        </div>
+        <div className="mt-16 grid items-stretch gap-7 md:grid-cols-2 lg:grid-cols-3 lg:pt-3">
+          {packs.map((pack) => (
+            <SupportPackCard key={pack.id} pack={pack} />
+          ))}
         </div>
       </Container>
     </section>
