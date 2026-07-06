@@ -9,6 +9,16 @@ function ruunion_theme_setup() {
 	add_theme_support( 'title-tag' );
 	add_theme_support( 'post-thumbnails' );
 	add_theme_support( 'responsive-embeds' );
+	add_theme_support(
+		'custom-logo',
+		array(
+			'height'      => 120,
+			'width'       => 320,
+			'flex-height' => true,
+			'flex-width'  => true,
+			'header-text' => array( 'site-title', 'site-description' ),
+		)
+	);
 	add_theme_support( 'woocommerce' );
 	add_theme_support( 'wc-product-gallery-zoom' );
 	add_theme_support( 'wc-product-gallery-lightbox' );
@@ -135,3 +145,27 @@ function ruunion_theme_body_classes( $classes ) {
 	return $classes;
 }
 add_filter( 'body_class', 'ruunion_theme_body_classes' );
+
+function ruunion_customize_register( $wp_customize ) {
+	$wp_customize->add_setting(
+		'ruunion_footer_logo',
+		array(
+			'sanitize_callback' => 'esc_url_raw',
+			'transport'         => 'refresh',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'ruunion_footer_logo',
+			array(
+				'label'       => __( 'Logo du footer RU Union', 'ruunion-theme' ),
+				'section'     => 'title_tagline',
+				'settings'    => 'ruunion_footer_logo',
+				'description' => __( 'Logo utilisé dans le footer. Si vide, le logo principal sera utilisé.', 'ruunion-theme' ),
+			)
+		)
+	);
+}
+add_action( 'customize_register', 'ruunion_customize_register' );
