@@ -5,17 +5,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function ruunion_enqueue_admin_style() {
-	$path = dirname( __DIR__ ) . '/assets/admin.css';
-	wp_enqueue_style(
-		'ruunion-admin',
-		plugins_url( 'assets/admin.css', dirname( __DIR__ ) . '/ruunion-core.php' ),
-		array(),
-		file_exists( $path ) ? (string) filemtime( $path ) : '1.0.0'
-	);
-}
-add_action( 'admin_enqueue_scripts', 'ruunion_enqueue_admin_style' );
-
 function ruunion_count_films( $meta_key = '', $meta_value = '' ) {
 	$args = array(
 		'post_type'      => 'film',

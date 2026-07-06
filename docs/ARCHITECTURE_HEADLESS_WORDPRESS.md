@@ -1,5 +1,9 @@
 # Architecture headless WordPress
 
+> Décision finale : EasyWP hébergera le site public avec WordPress, RU Union Core et RU Union Theme. L’architecture headless Next.js reste le prototype local et la référence UI ; elle n’est plus la cible de production EasyWP.
+
+La conversion et le déploiement sont documentés dans `docs/WORDPRESS_THEME_CONVERSION.md` et `docs/EASYWP_DEPLOYMENT.md`.
+
 ## Couche de présentation publique
 
 La direction UI est décrite dans `docs/UI_DIRECTION.md`. Les composants Next.js ne dupliquent pas les contenus métier : ils reçoivent les films normalisés depuis WordPress et les packs normalisés depuis WooCommerce. Les compositions graphiques sans média sont des fallbacks de présentation et ne remplacent pas les données du CMS.

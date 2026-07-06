@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RU Union Core
  * Description: Modèle éditorial local de RU Union : films, champs ACF, REST et données de démonstration.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: RU Union
  * Requires at least: 6.8
  * Requires PHP: 8.1
@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 require_once __DIR__ . '/includes/cms-pages.php';
+require_once __DIR__ . '/includes/admin-style.php';
 require_once __DIR__ . '/includes/admin-dashboard.php';
 
 function ruunion_register_film_post_type() {
