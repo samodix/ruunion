@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">RU Union</title>
+  <rect width="64" height="64" rx="18" fill="#0E9A8B"/>
+  <path d="M14 29c0-8 9-13 16-7l2 2 2-2c7-6 16-1 16 7 0 11-11 19-18 24-7-5-18-13-18-24Z" fill="none" stroke="#FAFAF7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m23 31 9 8 9-8" fill="none" stroke="#F6B62E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

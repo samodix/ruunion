@@ -49,6 +49,7 @@ Next.js reste le prototype fonctionnel et la référence UI. Il ne doit pas êtr
 - [ ] `/wp-json/wc/store/products` répond.
 - [ ] Le panier fonctionne sans activation d’un moyen de paiement réel.
 - [ ] `wp-config.php` n’a pas été modifié.
+- [ ] Les logos du header, du footer, du login et des widgets sont visibles.
 
 ## Limite de cette préparation
 

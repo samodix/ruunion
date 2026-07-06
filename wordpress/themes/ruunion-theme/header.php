@@ -12,9 +12,8 @@
 <a class="ru-skip-link" href="#main-content"><?php esc_html_e( 'Aller au contenu', 'ruunion-theme' ); ?></a>
 <header class="ru-header">
 	<div class="ru-container ru-header__inner">
-		<a class="ru-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php esc_attr_e( 'RU Union — Accueil', 'ruunion-theme' ); ?>">
-			<span class="ru-brand__mark" aria-hidden="true">RU</span>
-			<span class="ru-brand__text"><strong>RU Union</strong><small>L’union des plus humains</small></span>
+		<a class="site-logo" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php esc_attr_e( 'Accueil RU Union', 'ruunion-theme' ); ?>">
+			<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo-ruunion.svg' ); ?>" alt="<?php echo esc_attr( 'RU Union — L’union des plus humains' ); ?>">
 		</a>
 		<button class="ru-menu-toggle" type="button" aria-expanded="false" aria-controls="ru-primary-nav"><span></span><span></span><span></span><span class="screen-reader-text"><?php esc_html_e( 'Ouvrir le menu', 'ruunion-theme' ); ?></span></button>
 		<nav id="ru-primary-nav" class="ru-nav" aria-label="<?php esc_attr_e( 'Navigation principale', 'ruunion-theme' ); ?>">

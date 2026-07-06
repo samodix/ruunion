@@ -24,6 +24,8 @@ L’interface est convertie progressivement en thème PHP WordPress. EasyWP héb
 
 Le thème est situé dans `wordpress/themes/ruunion-theme`. Il charge un CSS compilé et autonome depuis `assets/css/main.css` et un JavaScript minimal pour la navigation mobile. Il ne requiert ni Elementor, ni Tailwind, ni Node en production.
 
+Les logos vectoriels sont documentés dans `docs/BRAND_ASSETS.md` et stockés sous `assets/images`. Le favicon est fourni sans modifier automatiquement l’option WordPress `site_icon`.
+
 RU Union Core doit rester actif : il fournit le CPT `film`, les champs ACF locaux, les données REST et le dashboard. Le thème lit directement :
 
 - les publications `film` et leurs métadonnées ACF ;

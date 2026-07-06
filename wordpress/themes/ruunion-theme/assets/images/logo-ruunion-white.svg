@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 72" role="img" aria-labelledby="title desc">
+  <title id="title">RU Union</title>
+  <desc id="desc">RU Union — L’union des plus humains</desc>
+  <rect width="64" height="64" x="4" y="4" rx="20" fill="#48C1B3"/>
+  <path d="M21 34c0-7 8-11 14-6l5 4 5-4c6-5 14-1 14 6 0 10-11 17-19 22-8-5-19-12-19-22Z" fill="none" stroke="#FAFAF7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m31 36 9 8 9-8" fill="none" stroke="#F6B62E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="84" y="34" fill="#FAFAF7" font-family="Poppins, Nunito, Rubik, system-ui, sans-serif" font-size="27" font-weight="800" letter-spacing="-1">RU Union</text>
+  <text x="85" y="54" fill="#DDEDEA" font-family="Nunito, Rubik, system-ui, sans-serif" font-size="12" font-weight="600">L’union des plus humains</text>
+</svg>

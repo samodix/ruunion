@@ -5,6 +5,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+function ruunion_dashboard_logo() {
+	$logo_url = plugins_url( 'assets/images/logo-ruunion.svg', dirname( __DIR__ ) . '/ruunion-core.php' );
+	printf( '<div class="ruunion-widget-brand"><img src="%s" alt="%s"></div>', esc_url( $logo_url ), esc_attr( 'RU Union — L’union des plus humains' ) );
+}
+
 function ruunion_count_films( $meta_key = '', $meta_value = '' ) {
 	$args = array(
 		'post_type'      => 'film',
@@ -21,6 +26,7 @@ function ruunion_count_films( $meta_key = '', $meta_value = '' ) {
 
 function ruunion_dashboard_overview() {
 	$products = wp_count_posts( 'product' );
+	ruunion_dashboard_logo();
 	?>
 	<div class="ruunion-dashboard-grid">
 		<div class="ruunion-stat"><strong><?php echo esc_html( ruunion_count_films() ); ?></strong><span>Films</span></div>
@@ -41,6 +47,7 @@ function ruunion_dashboard_collection() {
 		$collected += (float) get_post_meta( $film_id, 'montant_collecte', true );
 	}
 	$progress = $goal > 0 ? min( 100, round( ( $collected / $goal ) * 100 ) ) : 0;
+	ruunion_dashboard_logo();
 	?>
 	<div class="ruunion-collection-values">
 		<div><span>Objectifs</span><strong><?php echo esc_html( number_format_i18n( $goal, 0 ) ); ?> €</strong></div>
@@ -61,6 +68,7 @@ function ruunion_dashboard_seo() {
 		$titles += get_post_meta( $film_id, 'seo_title_custom', true ) ? 1 : 0;
 		$descs  += get_post_meta( $film_id, 'seo_description_custom', true ) ? 1 : 0;
 	}
+	ruunion_dashboard_logo();
 	?>
 	<ul class="ruunion-check-list">
 		<li><strong><?php echo esc_html( count( $cms_pages ) ); ?></strong> pages CMS/headless</li>
@@ -72,6 +80,7 @@ function ruunion_dashboard_seo() {
 }
 
 function ruunion_dashboard_quick_links() {
+	ruunion_dashboard_logo();
 	$links = array(
 		'Ajouter un film'      => admin_url( 'post-new.php?post_type=film' ),
 		'Voir tous les films'  => admin_url( 'edit.php?post_type=film' ),
@@ -88,6 +97,7 @@ function ruunion_dashboard_quick_links() {
 }
 
 function ruunion_dashboard_editorial_message() {
+	ruunion_dashboard_logo();
 	echo '<blockquote class="ruunion-editorial-message">Chaque film porté par RU Union est une rencontre entre une histoire, une émotion et une action concrète. Le CMS permet de garder cette intention vivante : publier, soutenir, raconter et relier.</blockquote>';
 }
 

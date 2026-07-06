@@ -179,6 +179,19 @@ body.wp-admin textarea::placeholder {
 #dashboard-widgets .postbox {
   background: #fff;
 }
+.ruunion-widget-brand {
+  display: flex;
+  margin: 0 0 16px;
+  padding: 0 0 14px;
+  border-bottom: 1px solid var(--ru-border);
+  align-items: center;
+}
+.ruunion-widget-brand img {
+  display: block;
+  width: 170px;
+  max-width: 100%;
+  height: auto;
+}
 .ruunion-dashboard-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

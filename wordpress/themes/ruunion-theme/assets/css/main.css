@@ -96,11 +96,18 @@ body.ruunion-public textarea {
   gap: 28px;
 }
 
-.ru-brand {
+.ru-brand,
+.site-logo {
   display: inline-flex;
   min-width: max-content;
   align-items: center;
   gap: 12px;
+}
+
+.site-logo img {
+  display: block;
+  width: auto;
+  height: 52px;
 }
 
 .ru-brand__mark {
@@ -1048,6 +1055,16 @@ body.ruunion-public .wp-element-button:hover {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.footer-logo {
+  display: inline-block;
+}
+
+.footer-logo img {
+  display: block;
+  width: auto;
+  height: 58px;
+}
+
 .ru-footer__intro h2 {
   max-width: 920px;
   margin: 24px 0;
@@ -1226,8 +1243,14 @@ body.ruunion-public select:focus {
     gap: 10px;
   }
 
-  .ru-brand__text {
-    display: none;
+  .site-logo img {
+    width: 178px;
+    height: auto;
+  }
+
+  .footer-logo img {
+    width: min(260px, 100%);
+    height: auto;
   }
 
   .ru-header .ru-button {

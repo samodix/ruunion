@@ -48,25 +48,18 @@ body.login::before {
 }
 
 .login h1 a {
-  width: 78px;
-  height: 78px;
-  border-radius: 24px;
-  background-color: var(--ru-primary-dark);
-  background-image: none;
-  box-shadow: 0 22px 55px rgba(14, 154, 139, 0.25);
+  width: 260px;
+  height: 64px;
+  border-radius: 0;
+  background-color: transparent;
+  background-image: url("images/logo-ruunion.svg");
+  background-position: center;
+  background-size: contain;
+  box-shadow: none;
 }
 
 .login h1 a::after {
-  display: grid;
-  width: 100%;
-  height: 100%;
-  place-items: center;
-  color: #fff;
-  content: "RU";
-  font-size: 23px;
-  font-weight: 900;
-  letter-spacing: -0.06em;
-  text-indent: 0;
+  content: none;
 }
 
 .ruunion-login-brand {
