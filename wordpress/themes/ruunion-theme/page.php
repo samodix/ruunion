@@ -1,4 +1,4 @@
-<?php get_header(); ?>
+﻿<?php get_header(); ?>
 <?php while ( have_posts() ) : the_post();
 	$slug     = get_post_field( 'post_name', get_the_ID() );
 	$is_legal = in_array( $slug, array( 'mentions-legales', 'politique-confidentialite', 'privacy-policy', 'cgu', 'cookies' ), true );
@@ -7,11 +7,11 @@
 <section class="ru-page-hero<?php echo $is_legal ? ' ru-page-hero--legal' : ''; ?>">
 	<div class="ru-container ru-page-hero__split">
 		<div>
-			<span class="ru-pill"><?php echo esc_html( $is_legal ? __( 'Cadre clair · Confiance', 'ruunion-theme' ) : __( 'RU Union', 'ruunion-theme' ) ); ?></span>
+			<span class="ru-pill"><?php echo esc_html( $is_legal ? __( 'Cadre clair آ· Confiance', 'ruunion-theme' ) : __( 'RU Union', 'ruunion-theme' ) ); ?></span>
 			<h1><?php the_title(); ?></h1>
-			<p><?php echo esc_html( $is_legal ? __( 'Des informations structurées, lisibles et accessibles pour comprendre nos engagements.', 'ruunion-theme' ) : __( 'Un espace éditorial construit autour de la clarté, de la proximité et de l’élan collectif.', 'ruunion-theme' ) ); ?></p>
+			<p><?php echo esc_html( $is_legal ? __( 'Des informations structurأ©es, lisibles et accessibles pour comprendre nos engagements.', 'ruunion-theme' ) : __( 'Un espace أ©ditorial construit autour de la clartأ©, de la proximitأ© et de lâ€™أ©lan collectif.', 'ruunion-theme' ) ); ?></p>
 		</div>
-		<figure class="ru-page-hero__image"><img src="<?php echo esc_url( ruunion_theme_asset_image( 'stock/cinematic-reference.jpg' ) ); ?>" alt="" loading="eager"></figure>
+		<figure class="ru-page-hero__image"><img src="<?php echo esc_url( ruunion_theme_asset_image( 'illustrations/illustrations-ruunion.webp' ) ); ?>" alt="" loading="eager"></figure>
 	</div>
 </section>
 <section class="ru-section">
@@ -24,3 +24,4 @@
 </section>
 <?php endwhile; ?>
 <?php get_footer(); ?>
+

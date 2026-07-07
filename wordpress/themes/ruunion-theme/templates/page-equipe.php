@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 /**
- * Template Name: Équipe RU Union
+ * Template Name: أ‰quipe RU Union
  */
 get_header();
 $members = ruunion_theme_team_members();
@@ -9,17 +9,17 @@ $members = ruunion_theme_team_members();
 	<div class="ru-container ru-page-hero__split">
 		<div>
 			<span class="ru-pill">Les visages du projet</span>
-			<h1>Une équipe reliée par la même intention</h1>
-			<p>Écriture, production, mentorat, image, coordination et terrain : RU Union avance grâce à des sensibilités complémentaires, toutes tournées vers l’humain.</p>
+			<h1>Une أ©quipe reliأ©e par la mأھme intention</h1>
+			<p>أ‰criture, production, mentorat, image, coordination et terrain : RU Union avance grأ¢ce أ  des sensibilitأ©s complأ©mentaires, toutes tournأ©es vers lâ€™humain.</p>
 		</div>
-		<figure class="ru-page-hero__image"><img src="<?php echo esc_url( ruunion_theme_asset_image( 'stock/cinematic-reference.jpg' ) ); ?>" alt="<?php esc_attr_e( 'Ambiance cinématographique RU Union', 'ruunion-theme' ); ?>" loading="eager"></figure>
+		<figure class="ru-page-hero__image"><img src="<?php echo esc_url( ruunion_theme_asset_image( 'illustrations/illustrations-ruunion.webp' ) ); ?>" alt="<?php esc_attr_e( 'Ambiance cinأ©matographique RU Union', 'ruunion-theme' ); ?>" loading="eager"></figure>
 	</div>
 </section>
 <section class="ru-section ru-team-section">
 	<div class="ru-container">
 		<div class="ru-section-heading ru-section-heading--split">
-			<div><span class="ru-eyebrow">Collectif</span><h2>Des talents, des regards, une même chaleur.</h2></div>
-			<p>Chaque fiche reprend les photos disponibles dans la médiathèque du projet et les associe à un rôle éditorial clair pour présenter le collectif.</p>
+			<div><span class="ru-eyebrow">Collectif</span><h2>Des talents, des regards, une mأھme chaleur.</h2></div>
+			<p>Chaque fiche reprend les photos disponibles dans la mأ©diathأ¨que du projet et les associe أ  un rأ´le أ©ditorial clair pour prأ©senter le collectif.</p>
 		</div>
 		<div class="ru-team-grid">
 			<?php foreach ( $members as $member ) : ?>
@@ -31,7 +31,7 @@ $members = ruunion_theme_team_members();
 						<span><?php echo esc_html( $member['role'] ); ?></span>
 						<h3><?php echo esc_html( $member['name'] ); ?></h3>
 						<p><?php echo esc_html( $member['bio'] ); ?></p>
-						<a href="<?php echo esc_url( ruunion_theme_page_url( 'contact' ) ); ?>"><?php esc_html_e( 'Contacter l’équipe', 'ruunion-theme' ); ?></a>
+						<a href="<?php echo esc_url( ruunion_theme_page_url( 'contact' ) ); ?>"><?php esc_html_e( 'Contacter lâ€™أ©quipe', 'ruunion-theme' ); ?></a>
 					</div>
 				</article>
 			<?php endforeach; ?>
@@ -39,3 +39,4 @@ $members = ruunion_theme_team_members();
 	</div>
 </section>
 <?php get_footer(); ?>
+

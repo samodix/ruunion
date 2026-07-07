@@ -1,5 +1,5 @@
-<?php
-/** Fonctions du thème RU Union. */
+﻿<?php
+/** Fonctions du thأ¨me RU Union. */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -62,9 +62,9 @@ function ruunion_theme_assets() {
 			'cartUrl'     => function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : '',
 			'checkoutUrl' => function_exists( 'wc_get_checkout_url' ) ? wc_get_checkout_url() : '',
 			'i18n'        => array(
-				'loading' => __( 'Chargement…', 'ruunion-theme' ),
+				'loading' => __( 'Chargementâ€¦', 'ruunion-theme' ),
 				'empty'   => __( 'Votre panier est vide.', 'ruunion-theme' ),
-				'error'   => __( 'Impossible de mettre à jour le panier.', 'ruunion-theme' ),
+				'error'   => __( 'Impossible de mettre أ  jour le panier.', 'ruunion-theme' ),
 			),
 		)
 	);
@@ -85,8 +85,8 @@ function ruunion_theme_status_label( $status ) {
 	$labels = array(
 		'en-production' => __( 'En production', 'ruunion-theme' ),
 		'en-diffusion'  => __( 'En diffusion', 'ruunion-theme' ),
-		'termine'       => __( 'Terminé', 'ruunion-theme' ),
-		'archive'       => __( 'Archivé', 'ruunion-theme' ),
+		'termine'       => __( 'Terminأ©', 'ruunion-theme' ),
+		'archive'       => __( 'Archivأ©', 'ruunion-theme' ),
 	);
 	return isset( $labels[ $status ] ) ? $labels[ $status ] : __( 'Projet RU Union', 'ruunion-theme' );
 }
@@ -154,7 +154,7 @@ function ruunion_theme_money( $amount ) {
 	if ( function_exists( 'wc_price' ) ) {
 		return wc_price( $amount );
 	}
-	return number_format_i18n( (float) $amount, 0 ) . ' €';
+	return number_format_i18n( (float) $amount, 0 ) . ' â‚¬';
 }
 
 function ruunion_theme_asset_image( $relative_path ) {
@@ -162,20 +162,56 @@ function ruunion_theme_asset_image( $relative_path ) {
 	return get_theme_file_uri( 'assets/images/' . $relative_path );
 }
 
+function ruunion_theme_normalized_key( $text ) {
+	$text = remove_accents( strtolower( (string) $text ) );
+	$text = preg_replace( '/[^a-z0-9]+/', '-', $text );
+	return trim( (string) $text, '-' );
+}
+
+function ruunion_theme_pack_image_map() {
+	return array(
+		'grand-mecene'           => array( 'file' => 'packs/pack-grand-mecene.webp', 'alt' => __( 'Pack Grand Mأ©cأ¨ne â€” RU Union', 'ruunion-theme' ) ),
+		'soutien-partenaire'     => array( 'file' => 'packs/pack-soutien-partenaire.webp', 'alt' => __( 'Pack Soutien Partenaire â€” RU Union', 'ruunion-theme' ) ),
+		'soutien-avant-premiere' => array( 'file' => 'packs/pack-soutien-avant-premiere.webp', 'alt' => __( 'Pack Soutien Avant-premiأ¨re â€” RU Union', 'ruunion-theme' ) ),
+		'soutien-film'           => array( 'file' => 'packs/pack-soutien-film.webp', 'alt' => __( 'Pack Soutien Film â€” RU Union', 'ruunion-theme' ) ),
+		'soutien-solidaire'      => array( 'file' => 'packs/pack-soutien-solidaire.webp', 'alt' => __( 'Pack Soutien Solidaire â€” RU Union', 'ruunion-theme' ) ),
+		'soutien-decouverte'     => array( 'file' => 'packs/pack-soutien-decouverte.webp', 'alt' => __( 'Pack Soutien Dأ©couverte â€” RU Union', 'ruunion-theme' ) ),
+	);
+}
+
+function ruunion_theme_pack_image_for_product( $product ) {
+	$map      = ruunion_theme_pack_image_map();
+	$name_key = $product && is_a( $product, 'WC_Product' ) ? ruunion_theme_normalized_key( $product->get_name() ) : '';
+
+	foreach ( $map as $key => $data ) {
+		if ( $name_key && false !== strpos( $name_key, $key ) ) {
+			return array(
+				'src' => ruunion_theme_asset_image( $data['file'] ),
+				'alt' => $data['alt'],
+			);
+		}
+	}
+
+	return array(
+		'src' => ruunion_theme_asset_image( 'illustrations/illustrations-ruunion.webp' ),
+		'alt' => __( 'Illustrations RU Union â€” solidaritأ©, cinأ©ma et engagement humain', 'ruunion-theme' ),
+	);
+}
+
 function ruunion_theme_team_members() {
 	return array(
-		array( 'name' => 'ROLAND USTOK', 'role' => __( 'Président · Coordination artistique', 'ruunion-theme' ), 'image' => 'team/ROLAND USTOK.webp', 'bio' => __( 'Il porte la vision RU Union avec une énergie de terrain, entre création, lien humain et accompagnement des projets.', 'ruunion-theme' ) ),
-		array( 'name' => 'Agnès Godey', 'role' => __( 'Production · Accompagnement', 'ruunion-theme' ), 'image' => 'team/Agnès Godey.webp', 'bio' => __( 'Elle relie les personnes, les calendriers et les besoins pour faire avancer les tournages avec douceur et précision.', 'ruunion-theme' ) ),
-		array( 'name' => 'ALAIN DEPARDIEU', 'role' => __( 'Mentor', 'ruunion-theme' ), 'image' => 'team/ALAIN DEPARDIEU - Mentor.webp', 'bio' => __( 'Un regard d’expérience, une présence exigeante et bienveillante pour guider les choix artistiques et humains.', 'ruunion-theme' ) ),
-		array( 'name' => 'Anna Lauble-QUINET', 'role' => __( 'Développement · Partenariats', 'ruunion-theme' ), 'image' => 'team/Anna Lauble-QUINET.webp', 'bio' => __( 'Elle accompagne les passerelles entre association, partenaires et publics autour de projets porteurs de sens.', 'ruunion-theme' ) ),
-		array( 'name' => 'Delphine Depardieu', 'role' => __( 'Transmission · Image', 'ruunion-theme' ), 'image' => 'team/Delphine Depardieu.webp', 'bio' => __( 'Elle apporte une sensibilité artistique au service des récits, des visages et des émotions justes.', 'ruunion-theme' ) ),
-		array( 'name' => 'France Renard', 'role' => __( 'Relations · Terrain', 'ruunion-theme' ), 'image' => 'team/France Renard.webp', 'bio' => __( 'Elle veille aux liens concrets avec les personnes, les lieux et les initiatives que RU Union accompagne.', 'ruunion-theme' ) ),
-		array( 'name' => 'Huifang Liu', 'role' => __( 'Culture · Coordination', 'ruunion-theme' ), 'image' => 'team/Huifang Liu.webp', 'bio' => __( 'Elle nourrit l’ouverture culturelle du collectif et la rencontre entre les sensibilités.', 'ruunion-theme' ) ),
-		array( 'name' => 'Lucie Peltier', 'role' => __( 'Création · Communication', 'ruunion-theme' ), 'image' => 'team/Lucie Peltier.webp', 'bio' => __( 'Elle transforme les intentions en messages clairs, chaleureux et fidèles à l’esprit RU Union.', 'ruunion-theme' ) ),
-		array( 'name' => 'Magalie Lerbey', 'role' => __( 'Organisation · Suivi projets', 'ruunion-theme' ), 'image' => 'team/Magalie Lerbey.webp', 'bio' => __( 'Elle structure les étapes, sécurise les détails et garde le cap humain des projets.', 'ruunion-theme' ) ),
-		array( 'name' => 'Marc De Panda', 'role' => __( 'Image · Création visuelle', 'ruunion-theme' ), 'image' => 'team/Marc De Panda.webp', 'bio' => __( 'Il accompagne l’univers visuel avec un regard contemporain, sensible et cinématographique.', 'ruunion-theme' ) ),
-		array( 'name' => 'Marie Prajoux', 'role' => __( 'Écriture · Médiation', 'ruunion-theme' ), 'image' => 'team/Marie Prajoux.webp', 'bio' => __( 'Elle aide les histoires à trouver leur voix, leur rythme et leur justesse émotionnelle.', 'ruunion-theme' ) ),
-		array( 'name' => 'MUSTAFA OZGUN', 'role' => __( 'Réalisateur', 'ruunion-theme' ), 'image' => 'team/MUSTAFA OZGUN - Réalisateur.webp', 'bio' => __( 'Il met en scène les récits avec une attention particulière aux silences, aux regards et à l’élan collectif.', 'ruunion-theme' ) ),
+		array( 'name' => 'ROLAND USTOK', 'role' => __( 'Prأ©sident آ· Coordination artistique', 'ruunion-theme' ), 'image' => 'team/ROLAND USTOK.webp', 'bio' => __( 'Il porte la vision RU Union avec une أ©nergie de terrain, entre crأ©ation, lien humain et accompagnement des projets.', 'ruunion-theme' ) ),
+		array( 'name' => 'Agnأ¨s Godey', 'role' => __( 'Production آ· Accompagnement', 'ruunion-theme' ), 'image' => 'team/Agnأ¨s Godey.webp', 'bio' => __( 'Elle relie les personnes, les calendriers et les besoins pour faire avancer les tournages avec douceur et prأ©cision.', 'ruunion-theme' ) ),
+		array( 'name' => 'ALAIN DEPARDIEU', 'role' => __( 'Mentor', 'ruunion-theme' ), 'image' => 'team/ALAIN DEPARDIEU - Mentor.webp', 'bio' => __( 'Un regard dâ€™expأ©rience, une prأ©sence exigeante et bienveillante pour guider les choix artistiques et humains.', 'ruunion-theme' ) ),
+		array( 'name' => 'Anna Lauble-QUINET', 'role' => __( 'Dأ©veloppement آ· Partenariats', 'ruunion-theme' ), 'image' => 'team/Anna Lauble-QUINET.webp', 'bio' => __( 'Elle accompagne les passerelles entre association, partenaires et publics autour de projets porteurs de sens.', 'ruunion-theme' ) ),
+		array( 'name' => 'Delphine Depardieu', 'role' => __( 'Transmission آ· Image', 'ruunion-theme' ), 'image' => 'team/Delphine Depardieu.webp', 'bio' => __( 'Elle apporte une sensibilitأ© artistique au service des rأ©cits, des visages et des أ©motions justes.', 'ruunion-theme' ) ),
+		array( 'name' => 'France Renard', 'role' => __( 'Relations آ· Terrain', 'ruunion-theme' ), 'image' => 'team/France Renard.webp', 'bio' => __( 'Elle veille aux liens concrets avec les personnes, les lieux et les initiatives que RU Union accompagne.', 'ruunion-theme' ) ),
+		array( 'name' => 'Huifang Liu', 'role' => __( 'Culture آ· Coordination', 'ruunion-theme' ), 'image' => 'team/Huifang Liu.webp', 'bio' => __( 'Elle nourrit lâ€™ouverture culturelle du collectif et la rencontre entre les sensibilitأ©s.', 'ruunion-theme' ) ),
+		array( 'name' => 'Lucie Peltier', 'role' => __( 'Crأ©ation آ· Communication', 'ruunion-theme' ), 'image' => 'team/Lucie Peltier.webp', 'bio' => __( 'Elle transforme les intentions en messages clairs, chaleureux et fidأ¨les أ  lâ€™esprit RU Union.', 'ruunion-theme' ) ),
+		array( 'name' => 'Magalie Lerbey', 'role' => __( 'Organisation آ· Suivi projets', 'ruunion-theme' ), 'image' => 'team/Magalie Lerbey.webp', 'bio' => __( 'Elle structure les أ©tapes, sأ©curise les dأ©tails et garde le cap humain des projets.', 'ruunion-theme' ) ),
+		array( 'name' => 'Marc De Panda', 'role' => __( 'Image آ· Crأ©ation visuelle', 'ruunion-theme' ), 'image' => 'team/Marc De Panda.webp', 'bio' => __( 'Il accompagne lâ€™univers visuel avec un regard contemporain, sensible et cinأ©matographique.', 'ruunion-theme' ) ),
+		array( 'name' => 'Marie Prajoux', 'role' => __( 'أ‰criture آ· Mأ©diation', 'ruunion-theme' ), 'image' => 'team/Marie Prajoux.webp', 'bio' => __( 'Elle aide les histoires أ  trouver leur voix, leur rythme et leur justesse أ©motionnelle.', 'ruunion-theme' ) ),
+		array( 'name' => 'MUSTAFA OZGUN', 'role' => __( 'Rأ©alisateur', 'ruunion-theme' ), 'image' => 'team/MUSTAFA OZGUN.webp', 'bio' => __( 'Il met en scأ¨ne les rأ©cits avec une attention particuliأ¨re aux silences, aux regards et أ  lâ€™أ©lan collectif.', 'ruunion-theme' ) ),
 	);
 }
 
@@ -206,9 +242,9 @@ function ruunion_theme_mini_cart_markup() {
 					<strong><?php echo esc_html( $product->get_name() ); ?></strong>
 					<span><?php echo wp_kses_post( WC()->cart->get_product_price( $product ) ); ?></span>
 					<div class="ru-mini-cart__qty">
-						<button type="button" data-ru-cart-qty="-1" aria-label="<?php esc_attr_e( 'Réduire la quantité', 'ruunion-theme' ); ?>">−</button>
+						<button type="button" data-ru-cart-qty="-1" aria-label="<?php esc_attr_e( 'Rأ©duire la quantitأ©', 'ruunion-theme' ); ?>">âˆ’</button>
 						<span><?php echo esc_html( $cart_item['quantity'] ); ?></span>
-						<button type="button" data-ru-cart-qty="1" aria-label="<?php esc_attr_e( 'Augmenter la quantité', 'ruunion-theme' ); ?>">+</button>
+						<button type="button" data-ru-cart-qty="1" aria-label="<?php esc_attr_e( 'Augmenter la quantitأ©', 'ruunion-theme' ); ?>">+</button>
 						<button type="button" class="ru-mini-cart__remove" data-ru-cart-remove><?php esc_html_e( 'Retirer', 'ruunion-theme' ); ?></button>
 					</div>
 				</div>
@@ -221,7 +257,7 @@ function ruunion_theme_mini_cart_markup() {
 			<span><?php esc_html_e( 'Sous-total', 'ruunion-theme' ); ?></span>
 			<strong><?php echo wp_kses_post( WC()->cart->get_cart_subtotal() ); ?></strong>
 		</div>
-		<a class="ru-button ru-button--primary" href="<?php echo esc_url( wc_get_checkout_url() ); ?>"><?php esc_html_e( 'Passer au checkout', 'ruunion-theme' ); ?></a>
+		<a class="ru-button ru-button--primary" href="<?php echo esc_url( wc_get_checkout_url() ); ?>"><?php esc_html_e( 'Valider mon soutien', 'ruunion-theme' ); ?></a>
 		<a class="ru-button ru-button--ghost" href="<?php echo esc_url( wc_get_cart_url() ); ?>"><?php esc_html_e( 'Voir le panier complet', 'ruunion-theme' ); ?></a>
 		<?php
 	}
@@ -282,9 +318,10 @@ function ruunion_customize_register( $wp_customize ) {
 				'label'       => __( 'Logo du footer RU Union', 'ruunion-theme' ),
 				'section'     => 'title_tagline',
 				'settings'    => 'ruunion_footer_logo',
-				'description' => __( 'Logo utilisé dans le footer. Si vide, le logo principal sera utilisé.', 'ruunion-theme' ),
+				'description' => __( 'Logo utilisأ© dans le footer. Si vide, le logo principal sera utilisأ©.', 'ruunion-theme' ),
 			)
 		)
 	);
 }
 add_action( 'customize_register', 'ruunion_customize_register' );
+

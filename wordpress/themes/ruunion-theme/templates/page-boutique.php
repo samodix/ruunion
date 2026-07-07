@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Template Name: Boutique RU Union
  */
@@ -9,12 +9,12 @@ $terms    = function_exists( 'get_terms' ) ? get_terms( array( 'taxonomy' => 'pr
 <section class="ru-page-hero ru-page-hero--shop">
 	<div class="ru-container ru-page-hero__split">
 		<div>
-			<span class="ru-pill">Packs de soutien · Boutique WooCommerce</span>
+			<span class="ru-pill">Packs de soutien آ· Boutique WooCommerce</span>
 			<h1>Soutenir les films avec un geste simple et beau</h1>
-			<p>Choisissez un pack, ouvrez le panier fluide et accompagnez concrètement les productions, projections et actions humaines de RU Union.</p>
+			<p>Choisissez un pack, ouvrez le panier fluide et accompagnez concrأ¨tement les productions, projections et actions humaines de RU Union.</p>
 			<div class="ru-actions"><button class="ru-button ru-button--primary" type="button" data-ru-cart-open>Ouvrir le panier</button><a class="ru-button ru-button--outline" href="<?php echo esc_url( function_exists( 'wc_get_checkout_url' ) ? wc_get_checkout_url() : '#' ); ?>">Checkout</a></div>
 		</div>
-		<figure class="ru-page-hero__image"><img src="<?php echo esc_url( ruunion_theme_asset_image( 'stock/cinematic-reference.jpg' ) ); ?>" alt="<?php esc_attr_e( 'Pack de soutien RU Union', 'ruunion-theme' ); ?>" loading="eager"></figure>
+		<figure class="ru-page-hero__image"><img src="<?php echo esc_url( ruunion_theme_asset_image( 'illustrations/illustrations-ruunion.webp' ) ); ?>" alt="<?php esc_attr_e( 'Pack de soutien RU Union', 'ruunion-theme' ); ?>" loading="eager"></figure>
 	</div>
 </section>
 <section class="ru-section ru-shop-section">
@@ -40,3 +40,4 @@ $terms    = function_exists( 'get_terms' ) ? get_terms( array( 'taxonomy' => 'pr
 	</div>
 </section>
 <?php get_footer(); ?>
+
