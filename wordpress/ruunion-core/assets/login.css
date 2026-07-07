@@ -10,6 +10,7 @@
 }
 
 body.login {
+  font-family: Almarai, "Nunito", "Rubik", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   min-height: 100vh;
   background:
     radial-gradient(
